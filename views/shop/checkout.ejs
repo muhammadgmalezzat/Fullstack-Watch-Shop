@@ -1,0 +1,49 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://checkout.stripe.com;"> -->
+     <script src="https://js.stripe.com/v3/"></script>
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main class="p-5">
+            <ul class="cart__item-list pt-5">
+                <% products.forEach(p => { %>
+                    <div class="cart-item d-flex align-items-center justify-content-between mb-2">
+                        <div class="d-flex align-items-center">
+
+                        <img src="/<%= p.productId.imageUrl %>" alt="Watch" class="watch-img mr-3">
+                        <div>
+                            <h5 ><%= p.productId.title %> (<%= p.quantity %>)</h5>
+                            <p class="text-muted mb-1">
+                                Elegant design with premium leather strap.</p>
+                            <p>Quantity: <%= p.quantity %></p>
+                            <p class="font-weight-bold"> Price : $<%= p.productId.price %></p>
+                        </div>
+                        </div>
+                </div>
+                <% }) %>
+            </ul>
+            <div class="centered ">
+                <h2>Total Price: $<%= totalSum %></h2>
+            </div>
+            <div class="centered">
+                <form class="pay" action="/create-order" method="POST">
+                    <button  type="submit">
+                        <a href="https://buy.stripe.com/test_fZebLW5lM1GzgOk3cc">pay with Stripe</a>
+                    </button>
+                        <script
+                        src="https://checkout.stripe.com/v3/checkout.js" class="stripe-button"
+                        data-key="pk_test_51R6pMpIis7pLr1myPrpArSv7K2a3IwVJd5pkcjMCcG7qt9rgrfSZmDmlj2dwXMGzhyJJzns1VAbk5krXOGpjuVxB00fXvWNdEk"
+                        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                        >
+                        </script>
+                </form>
+
+            </div>
+
+        </main>
+        <!-- <script src="https://js.stripe.com/v3/"></script> -->
+        <%- include('../includes/end.ejs') %>
+        

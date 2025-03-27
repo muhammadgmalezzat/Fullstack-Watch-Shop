@@ -1,0 +1,164 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <main>
+        
+    </main>
+    <%- include('../includes/navigation.ejs') %>
+
+    
+    <!--start carousal-->
+
+    <section class="the-carousel">
+    <div id="carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-controls">
+        <ol class="carousel-indicators">
+        <li data-target="#carousel" data-slide-to="0" class="active" style="background-image:url('img/gallery/gallery1.png')"></li>
+        <li data-target="#carousel" data-slide-to="1" style="background-image:url('img/3.jpg')"></li>
+        <li data-target="#carousel" data-slide-to="2" style="background-image:url('img/gallery/bg2.jpg')"></li>
+        
+        </ol>
+        <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+        <img src="img/left-arrow.svg" alt="Prev"> 
+    </a>
+    <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+        <img src="img/right-arrow.svg" alt="Next">
+    </a>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image:url('img/gallery/gallery1.png')">
+        <div class="container">
+        </div>
+        </div>
+        <div class="carousel-item" style="background-image:url('img/3.jpg')">
+        <div class="container">
+        </div>
+        </div>
+        <div class="carousel-item" style="background-image:url('img/gallery/bg2.jpg')">
+        <div class="container">
+        </div>
+        </div>
+    </div>
+    </div>
+    </section>
+
+    <!--end carousal-->
+
+        <!--start slider-->
+    <div class="slider">
+        <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-10 col-sm-12">
+            <div class="wow animate__fadeInLeft" data-wow-duration="2s">
+                <h1>Select Your New Perfect Style</h1>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat is aute irure.</p>
+                <button type="button" class="btn btn-dark about-details"><a href="/products"> Shop Now</a> </button>
+            </div>
+
+            </div>
+            <div class="col-xl-3 col-lg-3  d-none d-lg-block ">
+            <img src="img/hero/watch.png" alt="">
+            </div>
+        </div>
+        </div>
+    </div> 
+
+    <!--end slider-->
+
+
+        <!--? Gallery Area Start -->
+
+    <div class="gallery-area">
+        <div class="container p-0">
+        <div class="row text-center " data-wow-duration="3s">
+            <h1 style="padding-bottom: 80px;">Gallery Area</h1>
+        </div>
+        <div class="row text-center ">
+            <div class="col-xl-6 col-lg-4 col-md-6 col-sm-12 col-xm-12 ">
+            <div class="single-gallery " data-wow-duration="2s">
+                <div class="gallery-img big-pic">
+                <img src="img/gallery/gallery1.png" alt="gallery1">
+                </div>
+            </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xm-6">
+            <div class="single-gallery " data-wow-duration="2s">
+                <div class="gallery-img">
+                <img src="img/gallery/gallery2.png" alt="gallery2">
+                </div>
+            </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-12 col-sm-6 col-xm-6">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-xm-12">
+                <div class="single-gallery " data-wow-duration="2s">
+                    <div class="gallery-img">
+                    <img src="img/gallery/gallery3.png" alt="gallery3">
+                    </div>
+                </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-xm-12">
+                <div class="single-gallery " data-wow-duration="2s">
+                    <div class="gallery-img">
+                    <img src="img/gallery/gallery4.png" alt="gallery4">
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div> 
+
+    <!-- Gallery Area End -->
+
+
+        <!-- products-gallary start -->
+    <% if (prods.length > 0) { %>
+
+    <div class="products-gallary">
+        <div class="container text-center">
+            <h1>
+                Featured Watches
+            </h1>
+        <div class="row text-center">
+            <% for (let product of prods) { %>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6  ">
+                    <div class="watch-product text-center " data-wow-duration="1s">
+                        <div class="watch-product-img">
+                        <img src="/<%= product.imageUrl %>" alt="product1">
+                        </div>
+                        <div class="watch-product-caption">
+                        <h3><%= product.title %></h3>
+                        <span>$ <%= product.price %></span>
+                        <p class="product__description"><%= product.description %></p>
+                        <% if (isAuthenticated) { %>
+                        <div class="">
+                            <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+                        </div>
+                        <%} %>
+                        </div>
+                        
+                    </div>
+                </div>
+            <% } %>
+            
+        </div>
+        <button type="button" class="btn btn-dark view-details" data-wow-duration="3s">
+            <a href="/products">View More Products</a>
+        </button>
+        
+        </div>
+    </div>
+     <!-- <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %> -->
+    <% } else { %>
+            <h1>No Products Found!</h1>
+    <% } %>
+    <!-- products-gallary end -->
+
+
+<%- include('../includes/end.ejs') %>

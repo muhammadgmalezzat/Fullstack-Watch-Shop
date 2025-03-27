@@ -1,0 +1,112 @@
+
+<header >
+    
+    
+  <!--start navbar-->
+
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #1F1F1F;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Time <span>zone</span> </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/' ? 'active' : '' %>" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/products' ? 'active' : '' %>" href="/products">Shop</a>
+          </li>
+          <% if (isAuthenticated ) { %>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/checkout">Checkout</a>
+          </li>
+          <% if (isAdmin ) { %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle " href="/admin/products" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Admin
+            </a>
+            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+              <!--admin route--> 
+            <li class="nav-item">
+                <a class="fa-1.5x nav-link drop-item <%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link drop-item <%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products</a>
+              </li>
+            </ul>
+          </li>
+          <%} %>
+          
+            <%} %>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+
+          <li class="nav-item ">
+            <a class="nav-link " href="/blog"  role="button" >
+              Blog
+            </a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a 
+            class="nav-link dropdown-toggle <%= path === '/signup' || '/login' || '/reset'||'/logout' ? 'active' : '' %>" 
+            href="/" 
+            id="navbarDropdown" 
+            role="button" 
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+              Auth
+            </a>
+              <% if (!isAuthenticated ) { %>
+              <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                
+              <li class="nav-item ">
+                  <a class="fa-1.5x drop-item nav-link <%= path === '/login' ? 'active' : '' %>" href="/login">LogIn</a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link drop-item <%= path === '/signup' ? 'active' : '' %>" href="/signup">SignUp</a>
+                </li>
+              </ul>
+              <% } else { %>
+                <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                
+              
+                <li class="nav-item">
+                  <a class="nav-link drop-item <%= path === '/reset' ? 'active' : '' %>" href="/reset">Reset Password</a>
+                </li>
+                <!-- <li class="nav-item">
+                  <a class="nav-link drop-item <%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+                </li> -->
+                <li class="main-header__item nav-item">
+                            <form action="/logout" method="post">
+                              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button class="logout-btn nav-link " type="submit" >log out</button>
+                            </form>
+                  </li>
+              </ul>
+              <% } %>
+            </li>
+
+          
+          <ul class="nav justify-content-end">
+            <% if (isAuthenticated) { %>
+              <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">
+                <i class="fas fa-shopping-cart "></i>
+              </a>
+            <% } %>
+          </ul>
+        </ul>
+        
+      </div>
+    </div>
+  </nav>
+
+  <!--end navbar-->
+</header>

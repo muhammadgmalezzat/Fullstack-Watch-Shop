@@ -1,0 +1,45 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+ 
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main class="p-5 login-page">
+        <div class="container">
+            <div class="form-container">
+
+                <h2 class="mb-4 text-center">Reset Password</h2>
+                <form action="/reset" method="POST">
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input 
+                    class="form-control "
+                    type="email" 
+                    name="email" 
+                    id="email" 
+                    placeholder="Enter your email" 
+                    required>
+                </div>
+                <!-- Password -->
+                
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <% if (errorMessage) { %>
+                    <div class="user-message user-message--error mt-3 mb-3">
+                        <%= errorMessage %>
+                    </div>
+                <%}else{ %>
+                    <div class="user-message  mt-3 mb-3">
+                        verification will sent to your E-mail  
+                    </div>
+                    <%}%>
+                <!-- Login Button -->
+                <button type="submit" class="login-btn">Reset Password</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+<%- include('../includes/end.ejs') %>

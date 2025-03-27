@@ -1,0 +1,67 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+
+          <!--start carousal-->
+
+
+
+  <section class="the-carousel">
+  <div id="carousel" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" style="background-image:url('img/salvador.jpg')">
+      <div class="container">
+        <h1>Watches Shop</h1>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+      <!--end carousal-->
+    
+                <!-- products-gallary start -->
+            <% if (prods.length > 0) { %>
+
+            <div class="products-gallary">
+                <div class="container text-center">
+                    <h1>
+                        All Watches
+                    </h1>
+                <div class="row text-center">
+                    <% for (let product of prods) { %>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6  ">
+                            <div class="watch-product text-center " data-wow-duration="1s">
+                                <div class="watch-product-img">
+                                <img src="/<%= product.imageUrl %>" alt="product1">
+                                </div>
+                                <div class="watch-product-caption">
+                                <h3><%= product.title %></h3>
+                                <span>$ <%= product.price %></span>
+                                <p class="product__description"><%= product.description %></p>
+                                
+                                <div class="form">
+                                    <a href="/products/<%= product._id %>" class="btn btn-dark">Details</a>
+                                    <% if (isAuthenticated) { %>
+                                    <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+                                    <%} %>
+                                </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    <% } %>
+                    <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
+                    <% } else { %>
+                    <h1>No Products Found!</h1>
+            <% } %>
+            </div>
+
+            
+            
+            <%- include('../includes/end.ejs') %>

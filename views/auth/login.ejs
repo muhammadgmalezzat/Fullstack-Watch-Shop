@@ -1,0 +1,56 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <main class="p-5 login-page">
+
+        <div class="container">
+            <div class="form-container">
+
+                <h2 class="mb-4 text-center">Login</h2>
+                <form action="/login" method="POST">
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input 
+                    class="form-control <%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
+                    type="email" 
+                    name="email" 
+                    id="email" 
+                    value="<%= oldInput.email %>"
+                    placeholder="Enter your email" 
+                    required>
+                </div>
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                    class="form-control <%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>"
+                    type="password" 
+                    name="password" 
+                    id="password" 
+                    value="<%= oldInput.password %>"  
+                    placeholder="Enter your password" 
+                    required>
+                </div>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <% if (errorMessage) { %>
+                    <div class="user-message user-message--error mt-3 mb-3">
+                        <%= errorMessage %>
+                    </div>
+                <%} %>
+                <!-- Login Button -->
+                <button type="submit" class="login-btn">Login</button>
+                
+                <!-- Reset Password Link -->
+                <a href="/reset" class="reset-password">Forgot your password?</a>
+                </form>
+            </div>
+        </div>
+
+    </main>
+<%- include('../includes/end.ejs') %>

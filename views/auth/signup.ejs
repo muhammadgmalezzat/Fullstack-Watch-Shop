@@ -1,0 +1,61 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <div class="container signup-page">
+            <div class="form-container">
+                <h2 class="mb-4 text-center">Sign Up</h2>
+
+                <form action="/signup" method="POST" novalidate>
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input 
+                    class="form-control <%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
+                    type="email" 
+                    name="email" 
+                    id="email" 
+                    value="<%= oldInput.email %>"
+                    placeholder="Enter your email" 
+                    required>
+                </div>
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                    class="form-control <%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>"
+                    type="password" 
+                    name="password" 
+                    id="password" 
+                    value="<%= oldInput.password %>"
+                    placeholder="Enter your password" 
+                    required>
+                </div>
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input 
+                    class="form-control <%= validationErrors.find(e => e.param === 'confirmPassword') ? 'invalid' : '' %>"
+                    type="password" 
+                    name="confirmPassword" 
+                    id="confirmPassword" 
+                    value="<%= oldInput.confirmPassword %>"
+                    placeholder="Confirm your password" 
+                    required>
+                </div>
+                <% if (errorMessage) { %>
+                    <div class="user-message user-message--error mt-3 mb-3"> <%= errorMessage %></div>
+                <% } %>
+                <!-- Sign Up Button -->
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button class="signup-btn" type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </main>
+<%- include('../includes/end.ejs') %>
